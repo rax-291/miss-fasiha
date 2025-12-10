@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>الآنسة فصيحة</title>
+  <link rel="icon" href="logo.png" type="image/png"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- خلفية الشجرة + حدود لقياس مساحة الشجرة للبتلات -->
+  <div class="background-tree-container" aria-hidden="true">
+    <div id="tree-boundary" aria-hidden="true"></div>
+  </div>
+
+  <!-- حاوية البتلات -->
+  <div class="sakura-fall-container" aria-hidden="true"></div>
+
+  <!-- شريط التنقل -->
+  <nav class="main-nav">
+    <ul class="nav-list">
+      <li><a href="#home-section" data-nav="home">الرئيسية</a></li>
+      <li><a href="#about-section" data-nav="about">من نحن</a></li>
+      <li><a href="#services-section" data-nav="services">خدماتنا</a></li>
+      <li><a href="#translate-section" id="open-chat-inline"><i class="fa-solid fa-robot"></i> المساعدة</a></li>
+      <li><a href="#translate-section" data-nav="translate">الترجمة</a></li>
+      <li><a href="#contact-section" data-nav="contact">تواصل معنا</a></li>
+      <li><a href="#team-section" data-nav="team">فريق العمل</a></li>
+    </ul>
+  </nav>
+
+  <!-- الرئيسية -->
+  <section id="home-section" class="content-section home-hero">
+    <h1 class="app-title-home">الآنسة فصيحة</h1>
+  </section>
+
+  <!-- من نحن -->
+  <section id="about-section" class="content-section">
+    <div class="glass-card">
+      <h2 class="section-head">من نحن</h2>
+      <p> منصة بوت دردشة ونظام ترجمة ذكي يهدف إلى تعزيز المحتوى الرقمي العربي وتقديم خدمات لغوية عالية الجودة.
+      </p>
+      <p ><h3>رسالتنا</h3> </p>
+      <p>
+توفير ترجمة دقيقة وفصيحة من اللغة الإنجليزية إلى العربية ، تتجاوز الترجمة الحرفية لتنقل الشعور والسياق، مع تسهيل معالجة وترجمة الملفات المختلفة (مثل DOCX و EPUB) دون فقدان التنسيق الأصلي.</p>
+    </div>
+  </section>
+
+  <!-- خدماتنا -->
+  <section id="services-section" class="content-section">
+    <div class="glass-card">
+      <h2 class="section-head">خدماتنا</h2>
+      <ul class="services-list">
+        <li>تقديم ترجمة دقيقة وفصيحة من اللغة الإنجليزية إلى العربية.</li>  <li>الترجمة تراعي اللغة والشعور والسياق. </li>
+        <li>مراجعة لغوية وتدقيق إملائي</li> <li> تقديم خدمات ترجمة متخصصة (أكاديمية، أدبية، طبية، تقنية...).</li>
+        <li> يشمل ترجمة الكتب الإلكترونية بصيغة EPUB وملفات Word (DOCX). </li> <li>يوفر واجهة ويب تفاعلية تتيح ترجمة النصوص المباشرة. </li>
+        <li>إمكانية تنزيل الملف المترجم بنفس الصيغة. </li> <li>الوصول المجاني لخدمة ترجمة عالية الجودة </li>
+         <li> بوت دردشة ذكي لخدمة العملاء والإجابة على استفسارات المستخدمين.</li>  <li>تكامل مع نموذج Gemini AI لتقديم إجابات ذكية للأسئلة المعقدة. </li>
+       
+      </ul>
+    </div>
+  </section>
+
+  <!-- الترجمة -->
+  <section id="translate-section" class="content-section translate-section">
+    <h2 class="section-head">الترجمة</h2>
+
+    <div class="lang-row">
+      <label id="source-label" class="lang-label" for="source-text">الإنجليزية</label>
+      <div class="swap-wrap">
+        <button class="swap-btn" id="swap-langs" title="تبديل اللغات">
+          <i class="fa-solid fa-right-left"></i>
+        </button>
+      </div>
+      <label id="target-label" class="lang-label" for="translated-text">العربية</label>
+    </div>
+
+    <div class="text-inputs">
+      <textarea id="source-text" class="textbox" placeholder="Type or paste text here..." dir="ltr"></textarea>
+      <textarea id="translated-text" class="textbox" placeholder="ستظهر الترجمة هنا..." dir="rtl"></textarea>
+    </div>
+
+    <div class="actions">
+      <label class="btn ghost" title="رفع ملف">
+        <i class="fa-solid fa-file-arrow-up"></i>
+        <input id="upload-file" type="file" accept=".pdf,.txt,.doc,.docx,.epub" hidden />
+      </label>
+
+
+      <button id="translate-btn" class="btn primary">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> ترجمة الآن
+      </button>
+
+      <button class="btn ghost" id="download-btn" title="تنزيل بنفس صيغة الملف">
+        <i class="fa-solid fa-download"></i>
+      </button>
+
+      <button class="btn ghost" id="clear-btn" title="مسح النص">
+        <i class="fa-solid fa-eraser"></i>
+      </button>
+
+      <button class="btn ghost" id="copy-btn" title="نسخ الترجمة">
+        <i class="fa-regular fa-copy"></i>
+      </button>
+
+      <button class="btn ghost" id="speak-btn" title="استماع">
+        <i class="fa-solid fa-volume-high"></i>
+      </button>
+    </div>
+  </section>
+
+<!-- زر الشات بوت الإضافي -->
+<button id="chat-float-btn" title="الشات بوت">
+  <i class="fa-solid fa-robot"></i>
+</button>
+
+
+  <!-- تواصل معنا -->
+  <section id="contact-section" class="content-section">
+    <div class="glass-card">
+      <h2 class="section-head">تواصل معنا</h2>
+      <p class="contact-line">
+        <i class="fa-solid fa-phone"></i>
+        الهاتف: <a href="tel:+966567893451">+966567893451</a>
+      </p>
+      <p class="contact-line">
+        <i class="fa-regular fa-envelope"></i>
+        البريد: <a href="mailto:missfasihah@gmail.com">missfasihah@gmail.com</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- فريق العمل -->
+  <section id="team-section" class="content-section">
+    <div class="glass-card">
+      <h2 class="section-head">فريق العمل</h2>
+      <ul class="team-list">
+        <li>وسن حسن حقي</li>
+        <li>رحمه موسى الاسمري</li>
+        <li>فاطمة عبد الرحمن الغامدي</li>
+        <li>رغد حسن الزهراني</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- نافذة الشات بوت -->
+  <div id="chatbot-modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-head">
+        <span class="close-btn" id="close-chat">&times;</span>
+        <div class="chat-title"><i class="fa-solid fa-robot"></i> الآنسة فصيحة</div>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <div class="msg bot">مرحباً! كيف أساعدك؟</div>
+      </div>
+      <div class="chat-input">
+        <input id="chat-input" type="text" placeholder="اكتبي رسالتك واضغطي Enter..." />
+        <button id="send-chat-btn" class="btn primary"><i class="fa-solid fa-paper-plane"></i> إرسال</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- مكتبات التوليد (قبل script.js) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.0.4/docx.umd.min.js"></script>
+
+  <!-- سكربت الموقع -->
+  <script src="script.js"></script>
+</body>
+</html>

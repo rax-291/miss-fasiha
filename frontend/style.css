@@ -1,0 +1,318 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+
+/* أساسيات */
+:root{
+  --text:#555;
+  --nav-h:56px;
+  --blur:8px;
+  --radius:14px;
+
+
+  /* الشجرة: من اليسار لبعد منتصف الصفحة */
+  --tree-width: clamp(1600px, 90vw, 2000px); /* ✅ الشجرة صارت أكبر */
+  --tree-left: 0px;
+  --tree-top: 0px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:'Tajawal',system-ui,sans-serif;
+  color:var(--text);
+  background:#fcf8f3; /* خلفية موحدة */
+  overflow-x:hidden;
+}
+
+/* خلفية الشجرة */
+.background-tree-container{
+  position:fixed; inset:0; z-index:1; pointer-events:none;
+}
+#tree-boundary{
+  position:absolute; top:var(--tree-top); left:var(--tree-left);
+  width:var(--tree-width); aspect-ratio:1400/900; pointer-events:none;
+}
+.background-tree-container::before{
+  content:"";
+  position:absolute; top:var(--tree-top); left:var(--tree-left);
+  width:var(--tree-width); aspect-ratio:1400/900;
+  background:url('sakura-tree-bg.png') top left / contain no-repeat;
+  opacity:.9; filter: drop-shadow(0 6px 18px rgba(0,0,0,.08));
+}
+
+/* بتلات */
+.sakura-fall-container{ position:fixed; inset:0; z-index:2; pointer-events:none; }
+.petal{
+  position:fixed; top:-50px; width:34px; height:34px;
+  background:url('sakura-flower-petal.png') center/contain no-repeat;
+  opacity:.95; will-change:transform,opacity;
+}
+
+/* شريط التنقل */
+.main-nav {
+  position: fixed;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: var(--nav-h);
+  width: min(780px, 90vw); /* عرض الشريط */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  background: rgba(255, 255, 255, 0.30); /* ✅ شفافية أخف */
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  border-radius: 12px;
+  z-index: 1000;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05); /* ظل أنعم */
+}
+
+/* ترتيب العناصر داخل الشريط */
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 38px; /* ✅ زودنا المسافة بين الكلمات */
+  margin: 0;
+  padding: 0;
+}
+
+/* الروابط */
+.main-nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+
+
+
+/* الأقسام — شاشة كاملة لكل قسم + شفافية */
+.content-section{
+  position:relative; z-index:3;
+  padding: calc(var(--nav-h) + 40px) 16px 48px; /* فراغ علوي أكبر */
+  min-height: calc(100vh - var(--nav-h) + 2px); /* يمنع ظهور خط أسفل الهيرو */
+  scroll-margin-top: calc(var(--nav-h) + 14px);
+  background: transparent;
+}
+
+/* الصفحة الرئيسية */
+.home-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;  /* في المنتصف */
+  min-height: calc(100vh - var(--nav-h));
+  position: relative;
+}
+
+.app-title-home {
+  font-size: clamp(40px, 7vw, 80px);
+  margin: 0;
+  color: var(--text);
+  position: relative;
+  right: -180px;  /* حركها شوي لليمين */
+}
+
+/* الترجمة */
+.translate-section{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+}
+.section-head{ margin:0 0 14px; font-size:28px; color:var(--text); }
+
+.lang-row{ display:grid; grid-template-columns:1fr 56px 1fr; gap:12px; align-items:center; width:min(980px,96vw); margin-bottom:10px; }
+.lang-label{
+  background:rgba(255,255,255,.60); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  padding:10px 14px; border-radius:12px; font-weight:700; text-align:center; color:var(--text);
+}
+.swap-wrap{ display:flex; align-items:center; justify-content:center; }
+.swap-btn{
+  width:44px; height:44px; border-radius:50%; border:none; cursor:pointer; background:#fff; color:var(--text);
+  box-shadow:0 8px 20px rgba(0,0,0,.10);
+}
+
+.text-inputs{
+  width:min(980px,96vw); display:grid; grid-template-columns:1fr 1fr; gap:18px;
+}
+.textbox{
+  min-height:220px; padding:14px 16px;
+  background:rgba(255,255,255,.60); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  border:1px solid rgba(255,255,255,.7);
+  border-radius:16px; outline:none; resize:vertical;
+  color:var(--text);
+  box-shadow:0 10px 26px rgba(0,0,0,.08);
+}
+
+.actions{ margin-top:12px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+.btn{
+  border:none; border-radius:12px; padding:10px 14px; cursor:pointer; font-weight:700;
+  background:#fff; color:var(--text); box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+.btn.primary{ background:linear-gradient(180deg, #ffe3ea, #ffc6d4); }
+.btn.ghost{ background:rgba(255,255,255,.85); }
+/* شبكة الترجمة + الشات-بوت */
+.translate-grid{
+  width: min(1200px, 96vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr; /* يسار أوسع، يمين للشات */
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* العمود الأيسر يحتفظ بتنسيقاتك الحالية */
+.translate-left { display: flex; flex-direction: column; }
+
+/* لوحة الشات-بوت */
+.chatbot-panel{
+  display: flex;
+  flex-direction: column;
+  background: rgba(255,255,255,.70);
+  border: 1px solid rgba(255,255,255,.65);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.chat-head{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background: #ffe3ea;
+  color: #222;
+  font-weight: 700;
+  border-bottom: 1px solid #ffd3df;
+}
+.chat-head i{ color:#e25585; }
+
+.chat-body{
+  padding: 12px;
+  flex: 1;
+  overflow: auto;
+  background:#fff;
+}
+.msg{ padding:10px 12px; border-radius:12px; margin:8px 0; max-width:85%; color:#222;}
+.msg.bot{ background:#f5f5f5; }
+.msg.user{ background:#ffe9f0; margin-inline-start:auto; }
+
+.chat-input{
+  display:flex; gap:8px; padding:12px; background:#fff; border-top:1px solid #eee;
+}
+.chat-input input{
+  flex:1; padding:10px 12px; border-radius:10px; border:1px solid #ddd; color:#222;
+}
+
+/* على الشاشات الصغيرة: اجعليها عمود واحد */
+@media (max-width: 920px){
+  .translate-grid{ grid-template-columns: 1fr; }
+  .chatbot-panel{ order: 3; } /* الشات يجي تحت */
+}
+
+
+/* بطاقات */
+.glass-card{
+  width:min(980px,96vw);
+  margin: 64px auto 32px;             /* فراغات أكبر بين الأقسام */
+  background:rgba(255,255,255,.70);
+  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  border:1px solid rgba(255,255,255,.65); border-radius:var(--radius);
+  box-shadow:0 30px 60px rgba(0,0,0,.08); padding:24px; color:var(--text);
+}
+
+/* الشات بوت */
+
+.modal{
+  position:fixed; inset:0; display:none; place-items:center; z-index:1200; background:rgba(0,0,0,.25);
+}
+.modal.show{ display:grid; }
+.modal-content{
+  width:min(750px,95vw); height:70vh; background:#fff; border-radius:14px; overflow:hidden;
+  box-shadow:0 25px 60px rgba(0,0,0,.25);
+  display:flex; flex-direction:column;
+}
+.modal-head{
+  display:flex; flex-direction: row-reverse; /* X يمين والعنوان يمين */
+  align-items:center; justify-content:space-between; padding:12px 16px;
+  background:#ffe3ea; color:#222; direction:rtl;
+}
+.close-btn{ font-size:26px; cursor:pointer; }
+.chat-title{ font-weight:700; text-align:right; margin-right:8px; }
+.chat-body{ padding:14px; flex:1; overflow:auto; background:#fff; }
+.msg{ padding:10px 12px; border-radius:12px; margin:8px 0; max-width:85%; color:#222;}
+.msg.bot{ background:#f5f5f5; }
+.msg.user{ background:#ffe9f0; margin-inline-start:auto; }
+.chat-input{ display:flex; gap:8px; padding:12px; background:#fff; }
+.chat-input input{ flex:1; padding:10px 12px; border-radius:10px; border:1px solid #ddd; color:#222; }
+
+/* تجاوبية */
+@media (max-width:720px){
+  .lang-row{ grid-template-columns:1fr 48px 1fr; }
+  .text-inputs{ grid-template-columns:1fr; }
+}
+/* لون الروابط في قسم تواصل معنا مثل لون النص */
+#contact-section .glass-card a {
+  color: var(--text);           /* = #555 */
+  text-decoration: none;        /* بدون خط تحت */
+}
+
+#contact-section .glass-card a:visited,
+#contact-section .glass-card a:active,
+#contact-section .glass-card a:focus {
+  color: var(--text);
+}
+
+#contact-section .glass-card a:hover {
+  color: var(--text);
+  text-decoration: underline;   /* اختياري: خط تحت عند الهوفر */
+}
+#home-section .app-title-home {
+  position: relative;
+  right: -400px; /* زيدي الرقم لليمين أكثر */
+}
+
+/* وضوح النصوص الإنجليزية والعربية في مربعات الترجمة */
+#source-text[dir="ltr"], #translated-text[dir="ltr"] {
+  font-size: clamp(20px, 2.6vw, 26px);
+  line-height: 1.9;
+  font-weight: 600;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+#source-text[dir="rtl"], #translated-text[dir="rtl"] {
+  font-size: clamp(18px, 2.3vw, 22px);
+  line-height: 1.9;
+  font-weight: 600;
+  font-family: 'Tajawal', system-ui, sans-serif;
+  color: #444;
+}
+#translated-text {
+  pointer-events: none; /* ما يتعدل بالكتابة */
+  user-select: text; /* لكن نقدر ننسخه */
+}
+
+#chat-float-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 40px;
+  background: rgba(255,255,255,.70);
+  background-color: #de7ca5b6;
+  color: white;
+  padding: 15px 18px;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  font-size: 24px;
+  z-index: 1000;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#chat-float-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
